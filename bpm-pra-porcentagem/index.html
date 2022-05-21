@@ -1,0 +1,97 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>Calculador de BPM > Porcentagem</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <meta content="Calculador de BPM > Porcentagem" property="og:title">
+        <meta content="1) coloque os dois bpms; 2) aperte o botão; 3) coma um big mac;" property="og:description">
+        <style>
+            html, body {height: 100%; margin: 0px; padding: 0px;}
+            body {
+                background-image: url("sspg.png");
+                background-size: 800px;
+            }
+            #form-principal {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #2c2f33;
+                border: 15px solid #23272a;
+                padding: 50px;
+                width: 50%;
+                height: 40%;
+                margin: 0px auto;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-family: 'Roboto', sans-serif;
+                color: white;
+                font-size: larger;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-text-stroke: 0.45px;
+                text-rendering: geometricPrecision;
+                box-shadow: 10px 10px 10px black;
+            }
+
+            * {
+                cursor: url('https://cur.cursors-4u.net/games/gam-11/gam1097.ani'), url('https://cur.cursors-4u.net/games/gam-11/gam1097.png'), default;
+            }
+
+            input[type=button], input[type=reset] {
+                cursor: url(https://cur.cursors-4u.net/games/gam-11/gam1091.ani), url(https://cur.cursors-4u.net/games/gam-11/gam1091.png), pointer;
+            }
+
+            ::selection {
+                color: white;
+                background-color: #5865F2;
+            }
+
+            ::-moz-selection {
+                color: white;
+                background-color: #5865F2;
+            }
+
+            .cinza {
+                -webkit-filter: grayscale(100%);
+                -moz-filter: grayscale(100%);
+                filter: grayscale(100%);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="form-principal">
+            <form method="post" name="calc2" id="calc2">
+                De: <input type="text" size="7" name="t1" onfocus="this.select()" /> BPM
+                <br>
+                Para: <input type="text" size="7" name="t2" onfocus="this.select()" /> BPM
+                <br>
+                <input type="button" value="Calcular" id="sc" onclick="calcular(document.calc2.t1.value,document.calc2.t2.value); let audio = new Audio(cru(document.calc2.t1.value,document.calc2.t2.value)); audio.play();" name="button" /> - <input type="text" size="6" name="result" readonly onfocus="this.select(); document.execCommand('copy');" /> %
+                <br><br>
+                <input type="reset" name="Reset" id="sc" value="🔄" />
+            </form>
+        </div>
+    <script xml:space="preserve" type="text/javascript" src="calculador.js"></script>
+    </body>
+    <script>
+        document.body.addEventListener("mousemove", (e) => {
+            document.body.style.backgroundPositionX = -e.clientX + "px";
+            document.body.style.backgroundPositionY = -e.clientY + "px";
+        });
+        $(document).mouseenter(function () {
+            document.querySelector('html').classList.remove('cinza');
+        });
+        $(document).mouseleave(function () {
+            document.querySelector('html').classList.add('cinza');
+        });
+        $(window).click(function() {
+            let audio = new Audio('clicktone.wav');
+            audio.play();
+        });
+        $('#sc').click(function(event){
+            event.stopPropagation();
+        });
+    </script>
+</html>

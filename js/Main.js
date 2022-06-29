@@ -219,7 +219,7 @@ function createInstructions() {
 
 	text = document.createElement( 'div' );
 	text.onSelectStart = null;
-	text.innerHTML = '<span style="color:' + theme[0] + ';font-size:20px;">404 - Não encontrado</span><br /><br /><span style="font-size:15px;"><strong>Controles:</strong><br /><br />Use o botão esquerdo pra pegar.<br />Clique&nbsp;para&nbsp;criar.<br />Sacuda a janela pra mexe-las.<br />Clique duas vezes pra reiniciar.</span>';
+	text.innerHTML = '<span style="color:' + theme[0] + ';font-size:20px;">404 - Não encontrado.</span><br /><br /><span style="font-size:15px;"><strong>Controles:</strong><br /><br />Use o botão esquerdo pra pegar.<br />Clique&nbsp;para&nbsp;criar.<br />Sacuda a janela pra mexe-las.<br />Clique duas vezes pra reiniciar.</span>';
 	text.style.color = theme[1];
 	text.style.position = 'absolute';
 	text.style.left = '0px';

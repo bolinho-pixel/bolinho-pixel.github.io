@@ -129,6 +129,8 @@
       document.addEventListener( 'mousedown', onDocumentMouseDown, false );
       document.addEventListener( 'mouseup', onDocumentMouseUp, false );
 
+      document.addEventListener( 'contextmenu', onDocumentContextMenu, false );
+
       document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
 
       if ( window.location.hash ) {
@@ -154,8 +156,6 @@
         case 57: setBrushColor( 8 ); break;
         case 48: setBrushColor( 9 ); break;
 
-        case 16: isShiftDown = true; interact(); render(); break;
-
         case 37: offsetScene( - 1, 0 ); break;
         case 38: offsetScene( 0, - 1 ); break;
         case 39: offsetScene( 1, 0 ); break;
@@ -165,11 +165,17 @@
 
     }
 
+    function onDocumentContextMenu( event ) {
+
+      event.preventDefault();
+
+    }
+
     function onDocumentKeyUp( event ) {
 
       switch( event.keyCode ) {
 
-        case 16: isShiftDown = false; interact(); render(); break;
+        
 
       }
 
@@ -179,6 +185,7 @@
 
       event.preventDefault();
 
+
       isMouseDown = true;
 
       onMouseDownTheta = theta;
@@ -186,8 +193,10 @@
       onMouseDownPosition.x = event.clientX;
       onMouseDownPosition.y = event.clientY;
 
-    }
+    
 
+  }
+  
     function onDocumentMouseMove( event ) {
 
       event.preventDefault();
@@ -220,6 +229,31 @@
 
       isMouseDown = false;
 
+      if ( event.button == 2 ) {
+
+        var intersect2, intersects2 = ray.intersectScene( scene );
+
+        if ( intersects2.length > 0 ) {
+
+          intersect2 = intersects2[ 0 ].object == brush ? intersects2[ 1 ] : intersects2[ 0 ];
+
+          if ( intersect2 ) {
+
+             if ( intersect2.object != plane ) {
+
+                isShiftDown = true; interact(); render();
+
+             } else {
+
+                return;
+
+             }
+          }
+
+        }
+
+      }
+
       onMouseDownPosition.x = event.clientX - onMouseDownPosition.x;
       onMouseDownPosition.y = event.clientY - onMouseDownPosition.y;
 
@@ -242,6 +276,8 @@
             if ( intersect.object != plane ) {
 
               scene.removeObject( intersect.object );
+
+              isShiftDown = false;
 
             }
 
@@ -555,6 +591,6 @@
 
     }
 
-  </script><div><div style="position: absolute; top: 5px; width: 100%; text-align: center;"><span style="color: #444; background-color: #fff; border-bottom: 1px solid #ddd; padding: 8px 10px; text-transform: uppercase;"><strong>0 - 9</strong>: mudar cores, <strong>clique</strong>: adicionar voxel, <strong>shift + clique</strong>: remover voxel, <strong>arrastar</strong>: rodar canvas | <a href="javascript:salvar()">salvar</a> <a href="javascript:clear();">apagar</a></span></div><canvas width="1366" height="625"></canvas></div>
+  </script><div><div style="position: absolute; top: 5px; width: 100%; text-align: center;"><span style="color: #444; background-color: #fff; border-bottom: 1px solid #ddd; padding: 8px 10px; text-transform: uppercase;"><strong>0 - 9</strong>: mudar cores, <strong>botão esquerdo</strong>: adicionar voxel, <strong>botão direito</strong>: remover voxel, <strong>arrastar</strong>: rodar canvas | <a href="javascript:salvar()">salvar</a> <a href="javascript:clear();">apagar</a></span></div><canvas width="1366" height="625"></canvas></div>
   <div id="az" style="position: absolute; top: 5px; left: 10px; width: auto; text-align: left; z-index: 999;">bolinho.tk</div>
 </body></html>

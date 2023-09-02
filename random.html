@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Site Aleatório</title>
+</head>
+<body>
+    <script>
+        // URL do JSON remoto
+        var json_url = "https://raw.githubusercontent.com/sadgrlonline/yesterlinks/main/yesterlinks.json";
+
+        // Função para buscar e processar o JSON
+        function fetchAndRedirect() {
+            fetch(json_url)
+                .then(response => response.json())
+                .then(data => {
+                    // Verificar se o JSON possui dados válidos
+                    if (Array.isArray(data) && data.length > 0) {
+                        // Gerar um número aleatório entre 0 e o número de elementos no array
+                        var random_index = Math.floor(Math.random() * data.length);
+
+                        // Acessar o elemento aleatório do array
+                        var random_site = data[random_index];
+
+                        // Redirecionar para a URL correspondente
+                        if (random_site.url) {
+                            window.location.href = random_site.url;
+                        } else {
+                            console.error("URL inválida no JSON.");
+                        }
+                    } else {
+                        console.error("JSON vazio ou inválido.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro ao recuperar os dados JSON:", error);
+                });
+        }
+
+        // Chamar a função para iniciar o redirecionamento
+        fetchAndRedirect();
+    </script>
+</body>
+</html>

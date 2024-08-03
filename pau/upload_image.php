@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $imagePath = "uploads/img_{$randomId}.{$imageExtension}";
 
     if (file_put_contents($imagePath, $imageBase64) !== false) {
-        echo "pau/{$imagePath}";
+        echo "/pau/{$imagePath}";
     } else {
         http_response_code(500);
         echo "Erro ao salvar a imagem.";

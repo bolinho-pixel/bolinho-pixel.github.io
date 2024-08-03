@@ -39,7 +39,7 @@ $(document).ready(function() {
             const reader = new FileReader();
             reader.onload = function(e) {
                 $.ajax({
-                    url: 'pau/upload_image.php',
+                    url: '/pau/upload_image.php',
                     type: 'POST',
                     data: {
                         imageData: e.target.result,
@@ -80,7 +80,7 @@ $(document).ready(function() {
         });
 
         $.ajax({
-            url: 'pau/save_positions.php',
+            url: '/pau/save_positions.php',
             type: 'POST',
             data: { positions: JSON.stringify(imagePositions) },
             success: function(response) {
@@ -94,7 +94,7 @@ $(document).ready(function() {
 
     function loadImagePositions() {
         $.ajax({
-            url: 'pau/load_positions.php',
+            url: '/pau/load_positions.php',
             type: 'GET',
             dataType: 'json',
             success: function(data) {
@@ -121,7 +121,7 @@ $(document).ready(function() {
             event.preventDefault(); // Previne o menu de contexto padrão do navegador
             const imageUrl = $(this).find("img").attr("src");
             $.ajax({
-                url: 'pau/delete_image.php',
+                url: '/pau/delete_image.php',
                 type: 'POST',
                 data: { imageUrl: imageUrl },
                 success: function(response) {
